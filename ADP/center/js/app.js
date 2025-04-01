@@ -28,23 +28,35 @@ function useSampleData() {
     if (typeof SAMPLE_PRODUCTS !== 'undefined') {
         console.log('Loading sample product data...');
         $('.loading-status').text('Using sample product data');
+        
+        // Add a featured flag to some sample products
+        const sampleWithFeatured = SAMPLE_PRODUCTS.map((product, index) => {
+            // Mark some products as featured (for example, every 3rd product)
+            const isFeatured = index % 3 === 0 ? 'yes' : 'no';
+            return { ...product, featured: isFeatured };
+        });
+        
         // Convert sample data to the format expected by renderProducts
-        const formattedData = SAMPLE_PRODUCTS.map(product => [
+        const formattedData = sampleWithFeatured.map(product => [
             product.imageUrl,
             product.title,
             product.description,
             product.price,
-            product.productLink
+            product.productLink,
+            product.featured
         ]);
         
+        // Split the data into featured and regular products
+        const { featuredProducts, regularProducts } = splitProductsByFeatured(formattedData);
+        
         // Render products using sample data
-        renderProducts(formattedData);
+        renderProducts(regularProducts);
         
         // Render featured products
-        renderFeaturedProducts(formattedData);
+        renderFeaturedProducts(featuredProducts);
         
         // Also populate the scrolling banner
-        populateScrollingBanner(formattedData);
+        populateScrollingBanner(featuredProducts);
     } else {
         $('.loading').text('Error: Sample data not found.');
         $('.loading-status').text('Error: Sample data not found');
@@ -76,20 +88,28 @@ function fetchPublicGoogleSheet() {
                     row['Title'] || row['Product'] || row['Name'] || row['title'] || '',
                     row['Description'] || row['Desc'] || row['description'] || '',
                     row['Price'] || row['price'] || '',
-                    row['Product Link'] || row['Link'] || row['URL'] || row['productLink'] || ''
+                    row['Product Link'] || row['Link'] || row['URL'] || row['productLink'] || '',
+                    row['Featured'] || row['featured'] || row['Is Featured'] || row['isFeatured'] || false
                 ]);
                 
                 console.log('Found', formattedData.length, 'products in the spreadsheet');
+                
+                // Split the data into featured and regular products
+                const { featuredProducts, regularProducts } = splitProductsByFeatured(formattedData);
+                
+                console.log('Featured products:', featuredProducts.length);
+                console.log('Regular products:', regularProducts.length);
+                
                 $('.loading-status').text('Successfully loaded ' + formattedData.length + ' products from Google Sheets');
                 
                 // Process the data and render the products
-                renderProducts(formattedData);
+                renderProducts(regularProducts);
                 
                 // Render featured products
-                renderFeaturedProducts(formattedData);
+                renderFeaturedProducts(featuredProducts.length > 0 ? featuredProducts : formattedData.slice(0, 3));
                 
                 // Also populate the scrolling banner
-                populateScrollingBanner(formattedData);
+                populateScrollingBanner(featuredProducts.length > 0 ? featuredProducts : formattedData.slice(0, 5));
             } else {
                 console.warn('No products found in the spreadsheet, using sample data instead.');
                 $('.loading-status').text('No products found in Google Sheets, using sample data');
@@ -105,14 +125,49 @@ function fetchPublicGoogleSheet() {
     });
 }
 
+// Split products into featured and regular based on the featured flag
+function splitProductsByFeatured(products) {
+    const featuredProducts = [];
+    const regularProducts = [];
+    
+    products.forEach(product => {
+        // Check if the product has a featured flag (6th column)
+        const featuredFlag = product.length >= 6 ? product[5] : false;
+        
+        // Handle different possible values from Google Sheets checkboxes
+        // Google Sheets checkboxes return TRUE when checked and FALSE when unchecked
+        const isFeatured = 
+            featuredFlag === true || 
+            featuredFlag === 'TRUE' || 
+            featuredFlag === 'true' || 
+            featuredFlag === 'yes' || 
+            featuredFlag === 'Yes' || 
+            featuredFlag === '1' || 
+            featuredFlag === 1;
+        
+        if (isFeatured) {
+            featuredProducts.push(product);
+        } else {
+            regularProducts.push(product);
+        }
+    });
+    
+    return { featuredProducts, regularProducts };
+}
+
 // Render products in the carousel
 function renderProducts(data) {
     const $carousel = $('.product-carousel');
     $carousel.empty(); // Clear the loading message
     
+    if (data.length === 0) {
+        $carousel.append('<div class="loading">No regular products to display</div>');
+        return;
+    }
+    
     // Process each row of data from the spreadsheet
     data.forEach(row => {
-        // Expected columns: Image URL, Title, Description, Price, Product Link
+        // Expected columns: Image URL, Title, Description, Price, Product Link, Featured
         if (row.length >= 5) {
             const [imageUrl, title, description, price, productLink] = row;
             
@@ -143,9 +198,14 @@ function renderFeaturedProducts(data) {
     const $featuredSlider = $('.featured-product-slider');
     $featuredSlider.empty(); // Clear the loading message
     
+    if (data.length === 0) {
+        $featuredSlider.append('<div class="loading">No featured products to display</div>');
+        return;
+    }
+    
     // Process each row of data from the spreadsheet
     data.forEach(row => {
-        // Expected columns: Image URL, Title, Description, Price, Product Link
+        // Expected columns: Image URL, Title, Description, Price, Product Link, Featured
         if (row.length >= 5) {
             const [imageUrl, title, description, price, productLink] = row;
             
@@ -182,10 +242,13 @@ function populateScrollingBanner(data) {
     const $bannerContent = $('.banner-content');
     $bannerContent.empty();
     
-    // Select a few products for the banner (e.g., first 5 products)
-    const featuredProducts = data.slice(0, 5);
+    if (data.length === 0) {
+        $bannerContent.append('<span class="banner-item">Check out our featured products!</span>');
+        return;
+    }
     
-    featuredProducts.forEach(row => {
+    // Use featured products for the banner
+    data.forEach(row => {
         if (row.length >= 5) {
             const [_, title, __, price, productLink] = row; // Using _ for unused variables
             
@@ -200,9 +263,4 @@ function populateScrollingBanner(data) {
             $bannerContent.append($bannerItem);
         }
     });
-    
-    // If no products were added to the banner, add a default message
-    if ($bannerContent.children().length === 0) {
-        $bannerContent.append('<span class="banner-item">Check out our featured products!</span>');
-    }
 }
