@@ -13,7 +13,7 @@ const CONFIG = {
     // Sheet name and range
     // Format: 'SheetName!StartCell:EndCell'
     // Example: 'Sheet1!A2:E50' (columns A-E, rows 2-50)
-    range: 'Sheet1!A2:E50',
+    range: 'Sheet1!A2:F50',
     
     // Slick Carousel settings for the main product carousel
     carouselSettings: {
