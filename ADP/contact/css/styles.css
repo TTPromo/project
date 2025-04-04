@@ -1,0 +1,205 @@
+/* Main Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f5f5;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1 {
+    color: #0d6efd;
+    margin-bottom: 30px;
+}
+
+/* Beefup Accordion Styling */
+.beefup {
+    margin: 0 0 1px;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.beefup:hover {
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+.beefup__head {
+    margin: 0;
+    padding: 0;
+}
+
+.beefup__head button {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 15px 50px 15px 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: left;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+.beefup__head button:hover {
+    background-color: #f9f9f9;
+    color: #0056b3;
+}
+
+/* Chevron icon */
+.beefup__head button::after {
+    content: '\25BC';
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12px;
+    transition: transform 0.35s ease;
+}
+
+.beefup__head button[aria-expanded="true"]::after {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+/* Content area */
+.beefup__body {
+    padding: 0;
+    background-color: #fff;
+    overflow: hidden;
+    transition: height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.beefup__body[hidden] {
+    display: block !important;
+    height: 0;
+}
+
+.beefup__body:not([hidden]) {
+    height: auto;
+    animation: slideDown 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes slideDown {
+    from { 
+        max-height: 0;
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to { 
+        max-height: 1000px;
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Content formatting */
+.mockup {
+    padding: 0 20px 20px;
+}
+
+.mockup p {
+    margin: 0 0 15px;
+}
+
+.mockup ul, .mockup ol {
+    margin: 0 0 15px 20px;
+    padding: 0;
+}
+
+.mockup li {
+    margin-bottom: 8px;
+}
+
+/* Nested accordions */
+.beefup .beefup {
+    border-radius: 0;
+    box-shadow: none;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 0;
+}
+
+.beefup .beefup:last-child {
+    border-bottom: none;
+}
+
+.beefup .beefup .beefup__head button {
+    padding: 12px 50px 12px 20px;
+    font-weight: 500;
+    font-size: 15px;
+    background-color: #f9f9f9;
+}
+
+.beefup .beefup .beefup__head button:hover {
+    background-color: #f0f0f0;
+}
+
+.beefup .beefup .mockup {
+    background-color: #fff;
+    padding: 15px 20px 15px 25px;
+}
+
+/* Active States */
+.beefup__head button[aria-expanded="true"] {
+    color: #0d6efd;
+    background-color: #f0f7ff;
+}
+
+.beefup .beefup .beefup__head button[aria-expanded="true"] {
+    color: #0d6efd;
+    background-color: #edf5ff;
+}
+
+/* Loading Spinner */
+#loading {
+    padding: 40px 0;
+}
+
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+}
+
+/* Improved Typography */
+p {
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+ul, ol {
+    margin-bottom: 15px;
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .beefup__head button {
+        padding: 12px 15px;
+        font-size: 15px;
+    }
+    
+    .beefup .beefup .beefup__head button {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+    
+    .beefup__head button::after {
+        right: 15px;
+    }
+    
+    .mockup {
+        padding: 12px 15px;
+    }
+}
