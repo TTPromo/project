@@ -1,0 +1,195 @@
+/* External CSS to modify punchout catalog without touching HTML */
+
+/* Category styles */
+.categoryHeader {
+  display: flex;
+  align-items: center;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  border-left: 5px solid #4CAF50;
+}
+
+.categoryHeader h2:before {
+  font-family: "FontAwesome";
+  content: "\f06c";
+  color: #4CAF50;
+  margin-right: 15px;
+  font-size: 28px;
+}
+
+/* Button styling */
+.backButton {
+  display: inline-block;
+  background-color: #777777 !important;
+  color: white !important;
+  padding: 6px 15px;
+  font-size: 14px;
+  border-radius: 3px;
+  text-decoration: none;
+  margin-right: 15px;
+}
+
+.backButton:hover {
+  background-color: #555555 !important;
+  text-decoration: none;
+}
+
+/* Control bar */
+.control-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+}
+
+/* Breadcrumb */
+.youAreHere {
+  display: inline-block;
+}
+
+/* Sort options */
+.sortOptions {
+  float: right;
+}
+
+.sortOptionsSelect {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 14px;
+  min-width: 200px;
+}
+
+/* Product table */
+table.productTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  table-layout: fixed;
+}
+
+/* Product row */
+.productRow {
+  border-bottom: 1px solid #ddd;
+}
+
+.productRow:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Product columns */
+.productTable th:first-child,
+.productTable td:first-child {
+  width: 120px;
+}
+
+.productTable th:nth-child(3),
+.productTable td:nth-child(3) {
+  width: 120px;
+  text-align: center;
+}
+
+.productTable th:nth-child(4),
+.productTable td:nth-child(4) {
+  width: 120px;
+  text-align: center;
+}
+
+.productTable th:last-child,
+.productTable td:last-child {
+  width: 120px;
+  text-align: center;
+}
+
+/* Product image placeholders */
+.productImage img {
+  display: none; /* Hide empty images */
+}
+
+.productImage {
+  position: relative;
+}
+
+.productImage:after {
+  content: "Product Image";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 80px;
+  background-color: #f1f1f1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ddd;
+  color: #777;
+  font-size: 12px;
+  margin: 10px;
+}
+
+/* Product details */
+.productSKU {
+  font-weight: bold;
+  color: #555;
+  font-size: 12px;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.productName {
+  font-size: 14px;
+  text-decoration: none;
+  color: #333;
+  display: block;
+}
+
+.productName:hover {
+  text-decoration: underline;
+}
+
+/* Add to cart buttons */
+input[type="button"],
+input[type="submit"],
+button {
+  background-color: #777777 !important;
+  color: white !important;
+  border: none;
+  border-radius: 3px;
+  padding: 8px 15px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+input[type="button"]:hover,
+input[type="submit"]:hover,
+button:hover {
+  background-color: #555555 !important;
+}
+
+/* Pagination styling */
+.paginationControl {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.paginationControl a {
+  margin: 0 5px;
+  padding: 5px 10px;
+  text-decoration: none;
+  color: #333;
+  border-radius: 3px;
+}
+
+.paginationControl a:hover {
+  background-color: #f1f1f1;
+}
+
+.paginationControl .current {
+  background-color: #777777;
+  color: white;
+}
