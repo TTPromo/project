@@ -241,8 +241,8 @@ button:hover {
 
 .product-card {
   background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   overflow: hidden;
   transition: all 0.3s;
   display: flex;
@@ -252,13 +252,13 @@ button:hover {
 }
 
 .product-card:hover {
-  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
 }
 
 .product-image {
   height: 180px;
-  background: #f8f8f8;
+  background: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -279,6 +279,7 @@ button:hover {
 }
 
 .product-title {
+  color: #333;
   font-size: 16px;
   font-weight: 500;
   margin-bottom: 8px;
@@ -326,17 +327,17 @@ button:hover {
 }
 
 .product-link {
-  padding: 5px 12px !important;
+  padding: 4px 10px !important;
   font-size: 12px !important;
-  background: #B63530 !important;
+  background: #777777 !important;
   color: white !important;
-  border-radius: 4px !important;
+  border-radius: 3px !important;
   text-decoration: none !important;
   transition: background-color 0.3s !important;
 }
 
 .product-link:hover {
-  background: #932a26 !important;
+  background: #555555 !important;
 }
 
 /* Carousel Navigation */
@@ -348,7 +349,7 @@ button:hover {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.3);
   color: white;
   display: flex;
   align-items: center;
@@ -376,7 +377,7 @@ button:hover {
 
 .slick-dots li button:before {
   font-size: 10px;
-  color: #B63530;
+  color: #777777;
 }
 
 /* Featured Product Slider */
@@ -389,7 +390,7 @@ button:hover {
   position: relative;
   height: 300px;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: 4px;
 }
 
 .featured-image {
@@ -408,7 +409,7 @@ button:hover {
   left: 0;
   width: 100%;
   padding: 20px;
-  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
   color: white;
   z-index: 2;
 }
@@ -427,22 +428,22 @@ button:hover {
 
 .featured-button {
   display: inline-block;
-  background: #B63530;
+  background: #777777;
   color: white;
   padding: 8px 20px;
-  border-radius: 4px;
+  border-radius: 3px;
   text-decoration: none;
   font-weight: 500;
   transition: background 0.3s;
 }
 
 .featured-button:hover {
-  background: #932a26;
+  background: #555555;
 }
 
 /* Scrolling Banner */
 .scroll-banner {
-  background-color: #B63530;
+  background-color: #777777;
   color: white;
   padding: 10px 0;
   overflow: hidden;
