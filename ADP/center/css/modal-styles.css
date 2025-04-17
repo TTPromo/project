@@ -1,0 +1,175 @@
+/* Modal Styles for ADP Site Footer Links */
+
+/* Modal base */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    overflow-y: auto;
+}
+
+.modal.show {
+    opacity: 1;
+}
+
+/* Modal content */
+.modal-content {
+    background-color: #fff;
+    margin: 30px auto;
+    width: 90%;
+    max-width: 800px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+}
+
+.modal.show .modal-content {
+    transform: translateY(0);
+}
+
+/* Modal header */
+.modal h2 {
+    padding: 20px;
+    margin: 0;
+    border-bottom: 1px solid #eee;
+    color: #333;
+    font-size: 24px;
+}
+
+/* Modal body */
+.modal-body {
+    padding: 20px;
+    line-height: 1.6;
+}
+
+.modal-body h3 {
+    margin-top: 25px;
+    margin-bottom: 15px;
+    color: #333;
+    font-size: 20px;
+}
+
+.modal-body h4 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #555;
+    font-size: 18px;
+}
+
+.modal-body p {
+    margin-bottom: 15px;
+    color: #555;
+}
+
+.modal-body ul {
+    margin-bottom: 15px;
+    padding-left: 20px;
+}
+
+.modal-body li {
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.modal-body a {
+    color: #006699;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.modal-body a:hover {
+    color: #004466;
+    text-decoration: underline;
+}
+
+/* Close button styling */
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-modal:hover,
+.close-modal:focus {
+    color: #333;
+    text-decoration: none;
+}
+
+/* Modal footer with close button */
+.modal-footer {
+    padding: 15px 20px;
+    background-color: #f9f9f9;
+    border-top: 1px solid #eee;
+    text-align: right;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+/* Close button in footer */
+.close-btn {
+    background-color: #777;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.close-btn:hover {
+    background-color: #555;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        margin: 20px auto;
+    }
+    
+    .modal h2 {
+        font-size: 20px;
+        padding: 15px;
+    }
+    
+    .modal-body {
+        padding: 15px;
+    }
+    
+    .modal-body h3 {
+        font-size: 18px;
+    }
+    
+    .modal-body p, .modal-body li {
+        font-size: 14px;
+    }
+    
+    .close-modal {
+        top: 10px;
+        right: 15px;
+    }
+}
+
+/* When printing, hide modals */
+@media print {
+    .modal {
+        display: none !important;
+    }
+}
